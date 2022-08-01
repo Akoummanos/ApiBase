@@ -10,13 +10,13 @@ const client = new Client({
         port:Number(process.env.PORT),
         routePath:String(process.env.ROUTE_PATH),
         options:[
-            // morgan("dev"),
+            morgan("combined"),
             express.json(),
             express.urlencoded({extended:true}),
         ]
     }
 });
-client.app.use(morgan("dev"));
+// client.app.use(morgan("dev"));
 export default client;
 
 //init telegram bot
