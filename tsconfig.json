@@ -19,7 +19,7 @@
         "str/*":["src/structures/*"]
       }
   },
-  "include": ["src","src/**/*", "typings"],
+  "include": ["src","src/**/*", "src/typings"],
   "exclude": ["node_modules", "**/*.spec.ts"],
 
 }

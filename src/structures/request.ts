@@ -1,4 +1,5 @@
-import {request} from 'ClientTypes';
+
+import {request} from '../typings/client';
 
 export class Request {
     constructor(requestOptions: request.RequestType) {
