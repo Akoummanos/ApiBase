@@ -8,13 +8,14 @@ import {
 namespace client{
     
     interface expressOptions  {
-        port: number | undefined,
-        routePath: string | undefined,
-        options?: any[] | undefined,
+        apiFolder?:string,
+        port: number ,
+        routePath: string | '/',
+        options?: any[] ,
 
     }
     interface clientOptions  {
-        mongoURL?: string | undefined,
+        mongoURL?: string ,
         startServer: Boolean,
         ServerConfiguration?: expressOptions
     }

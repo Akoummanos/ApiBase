@@ -1,12 +1,7 @@
 
-import mongoose from "mongoose";
 import  colors from "colors";
 import { Router } from "express";
-import {glob} from 'glob'
-import {promisify} from 'util'
-const globPromise =  promisify(glob);
 import express from "express";
-// @ts-ignore
 import {client,request} from "../typings/client"
 import {terminal} from './terminal'
 import {registerFiles,mongoDbConnect} from "../functions/functions";
@@ -18,20 +13,18 @@ export class Client {
 
     constructor(options:client.clientOptions) {
         console.log(`${colors.bold(`💻[client]:`)}`+ ` Ready!`)
-        registerFiles(this.router)
-        this.startExpressServer(options.ServerConfiguration)
-        if(!options.mongoURL) return;
+        this.startExpressServer(options.startServer,options.ServerConfiguration)
+        if(!options.mongoURL) console.log(`${colors.bold(`💻[client]:`)}`+ ` MongoDB URL is not defined`)
         mongoDbConnect(options.mongoURL);
 
-
+        
     }
 
     
-    private startExpressServer(options:client.expressOptions):void{
-        this.app.use(options.routePath,this.router)
-        // options.options.forEach(option =>{
-        //     return this.app.use(option)
-        // })
+    private startExpressServer(startServer:Boolean,options:client.expressOptions):void{
+        if(!startServer) return console.log(`${colors.bold(`💻[client]:`)}`+ ` Express server is not started`)
+        this.app.use(options.routePath  ?? '/',this.router)
+        registerFiles(this.router)
         Array.from(options.options).forEach(option => {
             this.app.use(option)
         })

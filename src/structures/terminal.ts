@@ -18,11 +18,12 @@ export namespace terminal {
     }
 
     export function connect(request:Request, response:Response): void {
-        console.log(`${colors.bold(`🔌[connect]:`)} Connection established at`+ ` ${colors.italic.underline(`${new Date()}`)}`+  ` from`+ ` ${colors.italic.underline(`${request.ip}`)}` + ` at route ${colors.italic.underline(`${request.originalUrl}`)}`);
+        console.log(`${colors.bold(`🔌[connect]:`)} Connection established at`+ ` ${colors.italic.underline(`${new Date()}`)}`+  ` from`+ ` ${colors.italic.underline(`${request.ip.replace(/::ffff:/g,'')}`)}` + ` at route ${colors.italic.underline(`${request.originalUrl}`)}`);
     }
 
     export function error(message:any): void {
-        console.log(`${colors.bold(`🛑[error]:`)}`+ ` ${message}`);
+        // console.log();
+        throw new Error(`${colors.bold(`🛑[error]:`)}`+ ` ${message}`);
     }
 
 
