@@ -13,10 +13,8 @@ async function importFile(filePath: string) {
  return (await import(filePath))?.default
 }
 
-export async function registerFiles(router:express.Router){
- const files = await globPromise(
-     `${__dirname}/../api/*/*.ts`
- )
+export async function registerFiles(router:express.Router,path:string){
+  const files = await globPromise(path)
   Promise.all(files).then((fileList)=>{
    fileList.forEach(async (file)=>{
     let command: request.RequestType = await importFile(file);

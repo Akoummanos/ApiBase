@@ -24,7 +24,7 @@ export class Client {
     private startExpressServer(startServer:Boolean,options:client.expressOptions):void{
         if(!startServer) return console.log(`${colors.bold(`💻[client]:`)}`+ ` Express server is not started`)
         this.app.use(options.routePath  ?? '/',this.router)
-        registerFiles(this.router)
+        registerFiles(this.router,options.apiFolder)
         Array.from(options.options).forEach(option => {
             this.app.use(option)
         })
